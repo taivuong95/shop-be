@@ -1,9 +1,6 @@
 import jwt from 'jsonwebtoken';
 import type { IJwtData, IUser } from '../modules/user/user.model.js';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
-const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || '24h';
-
 export interface IJWTPayload {
  user : IJwtData;
 }
@@ -13,16 +10,6 @@ interface IVerifyResult {
   expired: boolean;
   decoded: IJWTPayload | null;
 }
-
-// export const generateToken = (user: IUser): string => {
-//   const payload: IJWTPayload = {
-//     userId: (user._id as any).toString(),
-//     email: user.email,
-//     username: user.username,
-//   };
-
-//   return jwt.sign(payload, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
-// };
 
 export function generateToken(
   payload: IJWTPayload,
@@ -53,11 +40,3 @@ export const verifyToken = (token: string, secretOrPublicKey: string): IVerifyRe
     };
   }
 };
-
-// export const decodeToken = (token: string): JWTPayload | null => {
-//   try {
-//     return jwt.verify(token, JWT_SECRET) as JWTPayload;
-//   } catch (error) {
-//     return null;
-//   }
-// };
