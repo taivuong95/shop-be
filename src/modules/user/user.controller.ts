@@ -49,7 +49,7 @@ export const login = async (req: Request, res: Response,  next: NextFunction) =>
 
     res.status(200).json({
       message: 'Login successfull',
-      data: { token, refreshToken },
+      data: { token, refreshToken, user: {username: user.username, email: user.email} },
     });
   } catch (error: unknown) {
     next(error);
